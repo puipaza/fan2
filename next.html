@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เป็นแฟนกันแล้วนะ 💖</title>
+
+<!-- ฟอนต์ -->
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Mali', cursive;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(
+        120deg,
+        #fff1a8,
+        #ffc3e6,
+        #d7b6ff,
+        #b7e6ff
+    );
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+}
+
+/* ไล่สีพื้นหลัง */
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* หัวใจลอย */
+.heart {
+    position: fixed;
+    bottom: -40px;
+    font-size: 26px;
+    animation: floatUp linear infinite;
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 0.9; }
+    to { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* โครงสร้าง */
+.container {
+    text-align: center;
+    padding: 40px 20px 90px;
+}
+
+/* หัวข้อ */
+.title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.title span {
+    margin: 0 10px;
+    display: inline-block;
+    animation: heartBeat 1.6s infinite;
+}
+
+@keyframes heartBeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+
+/* รูป */
+.image-row {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.image-box {
+    width: 160px;
+    height: 160px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    animation: floatBox 4s ease-in-out infinite;
+}
+
+.image-box:nth-child(2) { animation-delay: .4s; }
+.image-box:nth-child(3) { animation-delay: .8s; }
+.image-box:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes floatBox {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* กล่องข้อความ */
+.message-box {
+    max-width: 900px;
+    margin: auto;
+    background: #ffc66a;
+    border-radius: 30px;
+    padding: 30px 40px;
+    font-size: 24px;
+    line-height: 1.7;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    animation: popIn 1s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 เพลง -->
+<audio id="bgm" autoplay loop>
+    <source src="HYBS - Tip Toe Official Video.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div class="title">
+        <span>💖</span> เป็นแฟนกันแล้วนะ <span>💖</span>
+    </div>
+
+    <div class="image-row">
+        <div class="image-box"><img src="RobloxScreenShot20251217_234448064.png"></div>
+        <div class="image-box"><img src="RobloxScreenShot20251217_232428118.png"></div>
+        <div class="image-box"><img src="RobloxScreenShot20250908_230353236.png"></div>
+        <div class="image-box"><img src="3126164480_18649596490_1765990748233.png"></div>
+    </div>
+
+    <div class="message-box">
+        อยู่กับเค้าไปนานๆนะ รักเธอมากๆ<br>
+        ขอบคุณที่มาเป็นความสบายใจให้กันนะ อย่าทิ้งกันเลย<br>
+        รักเธอมากๆๆๆ อยากให้เธอเป็นของเค้า<br>
+        คนเดียว 💕
+    </div>
+</div>
+
+<script>
+/* บังคับให้เพลงเล่น */
+window.addEventListener("load", () => {
+    const bgm = document.getElementById("bgm");
+    bgm.volume = 0.5;
+    bgm.play().catch(()=>{});
+});
+
+/* หัวใจลอย */
+function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 10000);
+}
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>

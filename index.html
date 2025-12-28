@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>เป็นแฟนกันนะ 💖</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+
+    background: linear-gradient(
+        120deg,
+        #ff9a9e,
+        #fad0c4,
+        #fbc2eb,
+        #a6c1ee
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    transition: background 0.8s ease;
+}
+
+/* โหมดเศร้า */
+body.sad {
+    background: #000;
+    animation: none;
+}
+
+/* ไล่สี */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* หัวใจลอย */
+.heart-bg {
+    position: fixed;
+    bottom: -40px;
+    font-size: 28px;
+    animation: floatUp linear infinite;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(0); opacity: 0.8; }
+    to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* กล่องกลาง */
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+/* รูป */
+.character {
+    width: 160px;
+    margin-bottom: 25px;
+}
+
+/* ปุ่ม */
+.buttons {
+    display: flex;
+    gap: 30px;
+}
+
+button {
+    font-size: 22px;
+    padding: 14px 40px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.yes {
+    background: #ff5fa2;
+    color: white;
+}
+
+.no {
+    background: #444;
+    color: white;
+}
+
+/* ระเบิด */
+.burst {
+    position: fixed;
+    font-size: 32px;
+    pointer-events: none;
+    animation: explode 1.6s ease-out forwards;
+}
+
+@keyframes explode {
+    from {
+        transform: translate(0,0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translate(var(--x), var(--y)) scale(2);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="เรด.gif" class="character">
+    <div class="buttons">
+        <button class="yes" onclick="yesClick()">Yes</button>
+        <button class="no" onclick="noClick()">No</button>
+    </div>
+</div>
+
+<script>
+/* หัวใจลอยพื้นหลัง */
+function createFloatingHearts() {
+    const heart = document.createElement("div");
+    heart.className = "heart-bg";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 10000);
+}
+setInterval(createFloatingHearts, 300);
+
+/* ระเบิด */
+function explode(list, amount) {
+    for (let i = 0; i < amount; i++) {
+        const e = document.createElement("div");
+        e.className = "burst";
+        e.innerHTML = list[Math.floor(Math.random() * list.length)];
+        e.style.left = Math.random() * window.innerWidth + "px";
+        e.style.top = Math.random() * window.innerHeight + "px";
+        e.style.setProperty("--x", (Math.random() * 600 - 300) + "px");
+        e.style.setProperty("--y", (Math.random() * -500 - 100) + "px");
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 1600);
+    }
+}
+
+/* Yes → กลับสีเดิม + ระเบิด + ไปหน้าต่อไป */
+function yesClick() {
+    document.body.classList.remove("sad"); // 👈 กลับสีเดิม
+    explode(["💖","💕","💗","💓"], 120);
+
+    setTimeout(() => {
+        window.location.href = "next.html";
+    }, 1500);
+}
+
+/* No → โหมดเศร้า */
+function noClick() {
+    document.body.classList.add("sad");
+    explode(["😭","😢","💔","😞"], 150);
+}
+</script>
+
+</body>
+</html>
