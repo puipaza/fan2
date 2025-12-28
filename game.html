@@ -66,7 +66,16 @@ body.sad {
 /* รูป */
 .character {
     width: 160px;
+    margin-bottom: 10px;
+}
+
+/* ข้อความคำถาม */
+.question {
+    font-size: 26px;
+    color: rgb(0, 0, 0);
     margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
 /* ปุ่ม */
@@ -118,6 +127,12 @@ button {
 
 <div class="container">
     <img src="เรด.gif" class="character">
+
+    <!-- 👇 ข้อความที่เพิ่ม -->
+    <div class="question">
+        Do you want to be my boyfriend? 💖
+    </div>
+
     <div class="buttons">
         <button class="yes" onclick="yesClick()">Yes</button>
         <button class="no" onclick="noClick()">No</button>
@@ -152,17 +167,16 @@ function explode(list, amount) {
     }
 }
 
-/* Yes → กลับสีเดิม + ระเบิด + ไปหน้าต่อไป */
+/* Yes */
 function yesClick() {
-    document.body.classList.remove("sad"); // 👈 กลับสีเดิม
+    document.body.classList.remove("sad");
     explode(["💖","💕","💗","💓"], 120);
-
     setTimeout(() => {
         window.location.href = "next.html";
     }, 1500);
 }
 
-/* No → โหมดเศร้า */
+/* No */
 function noClick() {
     document.body.classList.add("sad");
     explode(["😭","😢","💔","😞"], 150);
